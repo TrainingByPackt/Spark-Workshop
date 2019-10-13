@@ -39,7 +39,7 @@ object FunctionalBasics {
 
         // or, a more verbose version that uses '=>' in both ways
         val len: String => Int = { (s: String) => s.length }
-    
+
         val tokenLengths = tokens.map(lengthFunction)
 
         ////////////////////////////////////////////
