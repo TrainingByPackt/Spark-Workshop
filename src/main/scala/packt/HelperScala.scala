@@ -1,6 +1,9 @@
 package packt
 
 import org.apache.hadoop.io.{LongWritable, Text}
+import org.apache.spark.api.java.JavaSparkContext
+import org.apache.spark.sql.SparkSession
+
 import scala.collection.mutable
 import scala.util.matching.Regex
 
@@ -17,6 +20,14 @@ object HelperScala {
   val delimiterWarcWetBytes: Array[Byte] = delimiterWarcWet.getBytes()
   val blankLine: Regex = "(?m:^(?=[\r\n]))".r
   val newLine = "[\\n\\r]+"
+
+  def createSession(numThreads: Int = 3, name: String = "Spark Application"): SparkSession = {
+    val session = SparkSession.builder
+      .master(s"local[$numThreads]") // program simulates a single executor with numThreads cores (one local JVM with numThreads threads)
+      .appName(name)
+      .getOrCreate()
+    session
+  }
 
   // helper function for extracting meta info
   def extractWetMetaInfo(rawMetaInfo: String) = {

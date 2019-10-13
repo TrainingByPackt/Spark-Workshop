@@ -4,16 +4,11 @@ import org.apache.spark.rdd.RDD
 import org.apache.spark.sql.SparkSession
 import packt.HelperScala
 
-object WordCount {
+object WordCountRDD {
 
   def main(args: Array[String]) {
 
-    // Initialization:
-    val threads = 3 // program simulates a single executor with 3 cores (one local JVM with 3 threads)
-    val session = SparkSession.builder
-      .master(s"local[$threads]")
-      .appName("Scala Word Count RDD")
-      .getOrCreate()
+    val session: SparkSession = HelperScala.createSession(2, "Scala WordCount RDD")
     val lines: RDD[String] = session.sparkContext.textFile(HelperScala.novellaLocation)
 
     // Preprocessing & reducing the input lines:
@@ -22,7 +17,8 @@ object WordCount {
     val counts: RDD[(String, Int)] = tokenFrequ.reduceByKey(_ + _)
 
     // Materializing to local disk:
-    counts.coalesce(threads) // optional, without coalesce many tiny output files are generated
+    counts
+      .coalesce(2) // optional, without coalesce many tiny output files are generated
       .saveAsTextFile("./countsplits")
 
     session.stop()

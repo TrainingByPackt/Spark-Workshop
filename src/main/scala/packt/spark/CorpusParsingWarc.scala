@@ -5,7 +5,7 @@ import org.apache.hadoop.mapreduce.lib.input.TextInputFormat
 import org.apache.spark.rdd.RDD
 import org.apache.spark.sql.SparkSession
 import packt.HelperScala.{delimiterWarcWet, parseRawWarcRecord}
-import packt.WarcRecord
+import packt.{HelperScala, WarcRecord}
 import packt.spark.CorpusParsingWet
 
 /**
@@ -17,12 +17,7 @@ object CorpusParsingWarc {
 
   def main(args: Array[String]) = {
 
-    val threads = 2
-    val session = SparkSession.builder.
-      master(s"local[$threads]")
-      .appName("Corpus Parsing")
-      .getOrCreate()
-
+    val session: SparkSession = HelperScala.createSession(2, "Corpus Parsing Warc")
     import session.implicits._
     import org.apache.spark.sql._
 
@@ -80,7 +75,5 @@ object CorpusParsingWarc {
       <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         ........
      */
-
   }
-
 }

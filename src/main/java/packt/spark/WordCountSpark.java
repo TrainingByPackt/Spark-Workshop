@@ -5,6 +5,7 @@ import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.sql.SparkSession;
 import packt.HelperScala;
 import scala.Tuple2;
+
 import java.util.Arrays;
 
 /**
@@ -15,13 +16,8 @@ import java.util.Arrays;
 public class WordCountSpark {
 
     public static void main(String... args) {
-        // Initialization:
-        int threads = 2; // program simulates a single executor with 3 cores (one local JVM with 3 threads)
-        SparkSession session = SparkSession
-                .builder()
-                .master("local[" + threads + "]")
-                .appName("Java WordCount RDD")
-                .getOrCreate();
+
+        SparkSession session = HelperScala.createSession(2, "Java WordCount RDD");
 
         // Preprocessing & reducing the input lines:
         JavaRDD<String> lines = session.read().textFile(HelperScala.novellaLocation()).javaRDD();
@@ -30,7 +26,8 @@ public class WordCountSpark {
         JavaPairRDD<String, Integer> counts = tokenFrequ.reduceByKey((a, b) -> a + b);
 
         // Materializing to local disk:
-        counts.saveAsTextFile("./countsplits");
+        counts.coalesce(2) // optional, without coalesce many tiny output files are generated
+                .saveAsTextFile("./countsplits");
 
         session.stop();
     }
