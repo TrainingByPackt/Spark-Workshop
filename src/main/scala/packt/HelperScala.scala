@@ -22,7 +22,7 @@ object HelperScala {
   val newLine = "[\\n\\r]+"
 
   def createSession(numThreads: Int = 3, name: String = "Spark Application"): SparkSession = {
-    val session = SparkSession.builder
+    val session: SparkSession = SparkSession.builder
       .master(s"local[$numThreads]") // program simulates a single executor with numThreads cores (one local JVM with numThreads threads)
       .appName(name)
       .getOrCreate()
