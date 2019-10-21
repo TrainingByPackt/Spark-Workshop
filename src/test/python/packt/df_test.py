@@ -1,7 +1,9 @@
 import unittest
 
+from pyspark.sql.tests import ReusedSQLTestCase
 
-class OurTests(unittest.TestCase):
+
+class OurTests(ReusedSQLTestCase):
     def runTest(self):
         from pyspark.sql.tests import ExamplePoint, ExamplePointUDT, DoubleType, StructType, StructField, Row
         row1 = (1.0, ExamplePoint(1.0, 2.0))

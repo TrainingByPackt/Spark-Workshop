@@ -9,3 +9,7 @@ from typing import List
 tokens: List[str] = ["Settlements", "some", "centuries", "old", "and", "still",  "no", "bigger", "than", "pinheads", "on", "the", "untouched", "expanse", "of", "their", "background"]
 lengths = list(map(lambda token: len(token), tokens))
 print(lengths)
+
+tokens: List[str] = ["Settlements", "some", "centuries", "old", "and", "still",  "no", "bigger", "than", "pinheads", "on", "the", "untouched", "expanse", "of", "their", "background"]
+o_words = list(filter(lambda word: word.startswith('o'), tokens))
+print(o_words)
