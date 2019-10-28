@@ -9,7 +9,6 @@ class TestIntersect extends SparkFunSuite with SharedSQLContext {
   val words1 = List[String]("Settlements", "some", "centuries", "old", "and", "still", "no", "bigger", "than", "pinheads", "on", "the", "untouched", "expanse", "of", "their", "background")
   val words2 = List[String]("centuries", "old", "and", "still", "no", "bigger", "than", "pinheads", "on", "the", "untouched", "expanse", "of")
 
-
   test("intersect") {
     val wordsRdd1: RDD[String] = spark.sparkContext.parallelize(words1) // Creating distributed collections
     val wordsRdd2: RDD[String] = spark.sparkContext.parallelize(words2)

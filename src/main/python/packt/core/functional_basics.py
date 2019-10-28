@@ -1,15 +1,18 @@
-from typing import List
+from typing import List, Optional
 
-# python_hydra: List[int] = [1, 2, 3, 4, 5]
-# print(type(python_hydra))
-# python_hydra = "This is now a string"
-# print(type(python_hydra))
+words: List[str] = ["Settlements", "some", "centuries", "old", "and", "still", "no", "bigger", "than", "pinheads", "on", "the", "untouched", "expanse", "of", "their", "background"]
+mapped1 = list(map(lambda token: len(token), words))  # lambda
+mapped2 = [*(map(lambda token: len(token), words))]  # unpacking generalization
 
 
-tokens: List[str] = ["Settlements", "some", "centuries", "old", "and", "still",  "no", "bigger", "than", "pinheads", "on", "the", "untouched", "expanse", "of", "their", "background"]
-lengths = list(map(lambda token: len(token), tokens))
-print(lengths)
+tup1 = "a",
+tup2 = ()
 
-tokens: List[str] = ["Settlements", "some", "centuries", "old", "and", "still",  "no", "bigger", "than", "pinheads", "on", "the", "untouched", "expanse", "of", "their", "background"]
-o_words = list(filter(lambda word: word.startswith('o'), tokens))
-print(o_words)
+print(type(tup1))
+print(type(tup2))
+
+
+
+
+# print(mapped1)
+# print(mapped2)

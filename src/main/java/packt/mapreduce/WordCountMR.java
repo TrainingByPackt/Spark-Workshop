@@ -21,7 +21,7 @@ import static packt.UtilitiesJava.tokenizeSimple;
  */
 public class WordCountMR {
 
-    static class WordTokenizer extends Mapper<Object, Text, Text, LongWritable> {
+    private static class WordTokenizer extends Mapper<Object, Text, Text, LongWritable> {
         private Text token = new Text();
         private final static LongWritable one = new LongWritable(1L);
 
@@ -36,7 +36,7 @@ public class WordCountMR {
 
     }
 
-    static class WordCounter extends Reducer<Text, LongWritable, Text, LongWritable> {
+    private static class WordCounter extends Reducer<Text, LongWritable, Text, LongWritable> {
 
         @Override
         public void reduce(Text key, Iterable<LongWritable> values, Context ctx) throws IOException, InterruptedException {
