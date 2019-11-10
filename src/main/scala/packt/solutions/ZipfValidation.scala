@@ -1,4 +1,4 @@
-package packt.spark
+package packt.solutions
 
 import org.apache.spark.rdd.RDD
 import org.apache.spark.sql.SparkSession
@@ -16,7 +16,7 @@ object ZipfValidation {
       .reduceByKey((count1, count2) => count1 + count2, 2)
 
     val sortedCountsToken = countsPerToken.map(_.swap) // swap is equivalent to `pair =>(pair._2, pair._1)`
-      .sortByKey(false)
+      .sortByKey(ascending=false)
 
     sortedCountsToken.saveAsTextFile("./sortedcounts")
   }

@@ -20,5 +20,7 @@ class TestFilters extends SparkFunSuite with SharedSQLContext {
     )
     assert(oWordsFilter.collect().forall(word => word.startsWith("o")))
     assert(oWordsFlatMap.collect().forall(word => word.startsWith("o")))
+    assert(oWordsFilter.collect() sameElements oWordsFlatMap.collect())
+
   }
 }

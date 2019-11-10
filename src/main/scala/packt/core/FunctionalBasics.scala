@@ -26,9 +26,9 @@ object FunctionalBasics {
 
 
     // flatMap
-    val stringList = List[String]("This", "is", "a", "list", "of", "type", "String")
-    val integerList = stringList.flatMap( word => Array[Int](word.length, -word.length, 0))
-    println(integerList)
+//    val stringList = List[String]("This", "is", "a", "list", "of", "type", "String")
+//    val integerList = stringList.flatMap( word => Array[Int](word.length, -word.length, 0))
+//    println(integerList)
 
     val oWordsLengths = words.flatMap(word =>
       if (word.startsWith("o"))
@@ -36,8 +36,19 @@ object FunctionalBasics {
       else // skipping words not starting with an `o` letter
         None
     )
-
     println(oWordsLengths) // List((old,3), (on,2), (of,2))
+
+
+    val wordLengths = List[Int](11, 4, 9, 3, 3, 5, 2, 6, 4, 8, 2, 3, 9, 7, 2, 5, 10)
+    val totalLength = wordLengths.reduce((leftNum: Int, rightNum: Int) => leftNum + rightNum)
+    val totalLength2 = wordLengths.reduce(_ + _)
+
+    val stringList = List[String]("This", "is", "a", "list", "of", "type", "String")
+    val folded = stringList.fold("<")((acc, word) => acc + "|" + word)
+    // Result: <|This|is|a|list|of|type|String
+
+
+    println(folded)
 
 
     //    val wordLengths = List[Int](11, 4, 9, 3, 3, 5, 2, 6, 4, 8, 2, 3, 9, 7, 2, 5, 10)

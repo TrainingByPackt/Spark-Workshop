@@ -26,6 +26,13 @@
     </dependency>
     <dependency>
       <groupId>org.apache.spark</groupId>
+      <artifactId>spark-mllib_2.12</artifactId>
+      <version>${spark.version}</version>
+      <!--      Uncomment for execution outside of IntelliJ-->
+      <!--      <scope>provided</scope>-->
+    </dependency>
+    <dependency>
+      <groupId>org.apache.spark</groupId>
       <artifactId>spark-core_2.12</artifactId>
       <version>${spark.version}</version>
       <classifier>tests</classifier>

@@ -29,6 +29,19 @@ object HelperScala {
     session
   }
 
+  def getNeighbours(line: String): Array[(String, Int)] = {
+    val tokens: Array[String] = line.split("\\s+")
+    tokens.map(token => (token, tokens.length))
+  }
+
+  def calcAverage(wordStat: (String, (Int, Int))): (String, Double) = {
+    val word = wordStat._1
+    val count = wordStat._2._1
+    val neighbours = wordStat._2._2
+    val avg = neighbours.toDouble / count.toDouble
+    (word, avg)
+  }
+
   // helper function for extracting meta info
   def extractWetMetaInfo(rawMetaInfo: String) = {
     val metaEntries = mutable.Map.empty[String, String]
